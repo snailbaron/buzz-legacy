@@ -1,19 +1,24 @@
 #include "process_manager.hpp"
 
-void ProcessManager::UpdateProcesses(int deltaMs)
+void ProcessManager::UpdateProcesses(long deltaMs)
 {
-    for (ProcessList::iterator i = m_processList.begin(); i != m_processList.end(); ++i) {
-        std::shared_ptr<Process> p(*i);
-        if (p->IsDead()) {
-            std::shared_ptr<Process> next = p->GetNext();
+    std::list<std::shared_ptr<BaseProcess>>::iterator i = m_processes.begin();
+    while (i != m_processes.end()) {
+        if ((*i)->IsDead()) {
+            // Remove process from list, and activate next one
+            std::shared_ptr<BaseProcess> next = (*i)->Next();
             if (next) {
-                p->SetNext(std::shared_ptr<Process>(nullptr));
-                Attach(next);
+                (*i)->SetNext(nullptr);
+                m_processes.push_back(next);
             }
-            Detach(p);
-        } else if (p->IsActive() && !p->IsPaused()) {
-            p->OnUpdate(deltaMs);
+            i = m_processes.erase(i);
+        } else if ((*i)->IsActive()) {
+            if ((*i)->IsNew()) {
+                (*i)->Init();
+                (*i)->SetState(ProcessState::Running);
+            }
+            (*i)->Update(deltaMs);
+            i++;
         }
-        ++i;
     }
 }

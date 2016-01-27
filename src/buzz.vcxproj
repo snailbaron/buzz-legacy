@@ -157,39 +157,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app.cpp" />
-    <ClCompile Include="base_game_logic.cpp" />
+    <ClCompile Include="base_process.cpp" />
     <ClCompile Include="dummy_ogl_window.cpp" />
+    <ClCompile Include="game\game.cpp" />
     <ClCompile Include="gl_funcs_def.cpp" />
-    <ClCompile Include="human_view.cpp" />
+    <ClCompile Include="human_game_view.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_window.cpp" />
-    <ClCompile Include="process.cpp" />
     <ClCompile Include="process_manager.cpp" />
-    <ClCompile Include="resource.cpp" />
-    <ClCompile Include="res_cache.cpp" />
-    <ClCompile Include="res_handle.cpp" />
-    <ClCompile Include="wait_process.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />
-    <ClInclude Include="base_game_logic.hpp" />
+    <ClInclude Include="base_process.hpp" />
     <ClInclude Include="dummy_ogl_window.hpp" />
     <ClInclude Include="error.hpp" />
-    <ClInclude Include="game_logic.hpp" />
+    <ClInclude Include="game\game.hpp" />
+    <ClInclude Include="game_view.hpp" />
     <ClInclude Include="glext.h" />
     <ClInclude Include="gl_funcs_def.hpp" />
-    <ClInclude Include="human_view.hpp" />
+    <ClInclude Include="human_game_view.hpp" />
     <ClInclude Include="input_handlers.hpp" />
     <ClInclude Include="main_window.hpp" />
     <ClInclude Include="optional.hpp" />
-    <ClInclude Include="process.hpp" />
     <ClInclude Include="process_manager.hpp" />
-    <ClInclude Include="resource.hpp" />
-    <ClInclude Include="resource_file.hpp" />
-    <ClInclude Include="res_cache.hpp" />
-    <ClInclude Include="res_handle.hpp" />
-    <ClInclude Include="wait_process.hpp" />
+    <ClInclude Include="screen_element.hpp" />
     <ClInclude Include="wglext.h" />
     <ClInclude Include="window.hpp" />
   </ItemGroup>

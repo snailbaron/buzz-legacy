@@ -2,27 +2,16 @@
 #define _PROCESS_MANAGER_HPP_
 
 #include <list>
-#include "process.hpp"
-
-typedef std::list<std::shared_ptr<Process>> ProcessList;
+#include <memory>
+#include "base_process.hpp"
 
 class ProcessManager
 {
 public:
-    ~ProcessManager();
-
-    void Attach(std::shared_ptr<Process> process);
-
-    bool HasProcesses();
-    bool IsProcessActive(int type);
-
-    void UpdateProcesses(int deltaMs);
+    void UpdateProcesses(long deltaMs);
 
 protected:
-    ProcessList m_processList;
-
-private:
-    void Detach(std::shared_ptr<Process> process);
+    std::list<std::shared_ptr<BaseProcess>> m_processes;
 };
 
 #endif

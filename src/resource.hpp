@@ -2,6 +2,8 @@
 #define _RESOURCE_HPP_
 
 #include <string>
+#include "res_handle.hpp"
+#include "res_cache.hpp"
 
 struct Resource
 {
