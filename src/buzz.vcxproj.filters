@@ -45,6 +45,9 @@
     <ClCompile Include="human_game_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="app\application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="error.hpp">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="human_game_view.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\application.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
