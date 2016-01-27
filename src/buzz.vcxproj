@@ -156,20 +156,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="base_game_logic.cpp" />
     <ClCompile Include="dummy_ogl_window.cpp" />
-    <ClCompile Include="game_window.cpp" />
     <ClCompile Include="gl_funcs_def.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_window.cpp" />
+    <ClCompile Include="process.cpp" />
+    <ClCompile Include="process_manager.cpp" />
+    <ClCompile Include="wait_process.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="app.hpp" />
+    <ClInclude Include="base_game_logic.hpp" />
     <ClInclude Include="dummy_ogl_window.hpp" />
     <ClInclude Include="error.hpp" />
-    <ClInclude Include="game_window.hpp" />
+    <ClInclude Include="game_logic.hpp" />
     <ClInclude Include="gl_funcs_def.hpp" />
     <ClInclude Include="main_window.hpp" />
     <ClInclude Include="optional.hpp" />
+    <ClInclude Include="process.hpp" />
+    <ClInclude Include="process_manager.hpp" />
+    <ClInclude Include="wait_process.hpp" />
     <ClInclude Include="window.hpp" />
   </ItemGroup>
   <ItemGroup>

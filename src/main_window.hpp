@@ -6,10 +6,16 @@
 class MainWindow : public Window
 {
 public:
-    MainWindow(HINSTANCE hInstance);
-    virtual ~MainWindow();
+    MainWindow(HINSTANCE hInstance) :
+        Window(hInstance, "Main"), m_dc(NULL), m_context(NULL) {}
+    virtual ~MainWindow() {}
+
+    virtual void Init();
+    virtual void Destroy();
 
 protected:
+    virtual LRESULT WinProc(UINT msg, WPARAM wparam, LPARAM lparam);
+
     virtual const CHAR * ClassName() const { return "MainWindowClass"; }
     virtual const UINT ClassStyle() const { return CS_OWNDC; }
     virtual const DWORD WindowStyle() const { return WS_OVERLAPPEDWINDOW | WS_VISIBLE; }

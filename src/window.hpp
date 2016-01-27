@@ -10,9 +10,10 @@ public:
     Window(const HINSTANCE &hInstance, const CHAR *name);
     virtual ~Window();
 
-    void Init();
-    void Destroy();
     const HWND Hwnd() const { return m_hwnd; }
+
+    virtual void Init();
+    virtual void Destroy();
 
 protected:
     virtual LRESULT WinProc(UINT msg, WPARAM wparam, LPARAM lparam);
@@ -25,6 +26,7 @@ private:
     static LRESULT CALLBACK GlobalWinProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
     HINSTANCE m_hInstance;
+    CHAR *m_name;
     HWND m_hwnd;
 };
 

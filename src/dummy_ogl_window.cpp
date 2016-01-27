@@ -1,9 +1,11 @@
 #include "dummy_ogl_window.hpp"
 #include "error.hpp"
 
-DummyOglWindow::DummyOglWindow(const HINSTANCE &hInstance) :
-    Window(hInstance, "DummyOglWindow")
+void DummyOglWindow::Init()
 {
+    // Initialize base window
+    Window::Init();
+
     // Get device context for this window
     m_dc = GetDC(Hwnd());
 
@@ -34,10 +36,13 @@ DummyOglWindow::DummyOglWindow(const HINSTANCE &hInstance) :
     }
 }
 
-DummyOglWindow::~DummyOglWindow()
+void DummyOglWindow::Destroy()
 {
     // Delete dummy OpenGL context
     wglMakeCurrent(m_dc, NULL);
     wglDeleteContext(m_context);
+
+    // Destroy base window
+    Window::Destroy();
 }
 

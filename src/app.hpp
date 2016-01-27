@@ -2,14 +2,13 @@
 #define _APP_HPP_
 
 #include <Windows.h>
-#include "game.hpp"
 
 class App
 {
 public:
     bool InitInstance(HINSTANCE hInstance, LPSTR cmdLine);
 
-    Game * CreateGameAndView();
+    //Game * CreateGameAndView();
 
 private:
     HMODULE m_langDll;

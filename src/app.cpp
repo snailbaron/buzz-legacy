@@ -75,6 +75,7 @@ bool App::InitInstance(HINSTANCE hInstance, LPSTR cmdLine)
     SetCursor(NULL);
 
     // Load string table from language resource DLL
+    /*
     char appPath[MAX_PATH + 1] = {0};
     GetModuleFileName(NULL, appPath, MAX_PATH);
     char *pSep = strrchr(appPath, '\\');
@@ -90,6 +91,7 @@ bool App::InitInstance(HINSTANCE hInstance, LPSTR cmdLine)
         MessageBox(NULL, msg, "Error", MB_OK | MB_ICONERROR);
         return false;
     }
+    */
 
     // Check machine resources
     bool resourceCheck = false;
@@ -105,7 +107,7 @@ bool App::InitInstance(HINSTANCE hInstance, LPSTR cmdLine)
             // TODO: Check CPU speed? If possible at all.
 
         } catch (Error err) {
-            // TODO: Report error during resource checking
+            err.ErrCode(); // TODO: Report error during resource checking
             return false;
         }
         
@@ -138,7 +140,3 @@ bool App::InitInstance(HINSTANCE hInstance, LPSTR cmdLine)
     return true;
 }
 
-Game * App::CreateGameAndView()
-{
-    
-}

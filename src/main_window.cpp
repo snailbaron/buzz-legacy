@@ -2,9 +2,11 @@
 #include "gl_funcs_def.hpp"
 #include "error.hpp"
 
-MainWindow::MainWindow(HINSTANCE hInstance) :
-    Window(hInstance, "Main")
+void MainWindow::Init()
 {
+    // Initialize base window
+    Window::Init();
+
     // Get window's device context
     m_dc = GetDC(Hwnd());
 
@@ -29,8 +31,24 @@ MainWindow::MainWindow(HINSTANCE hInstance) :
     wglMakeCurrent(m_dc, context);
 }
 
-MainWindow::~MainWindow()
+void MainWindow::Destroy()
 {
+    // Delete OpenGL context
     wglMakeCurrent(m_dc, NULL);
     wglDeleteContext(m_context);
+
+    // Destroy base window
+    Window::Destroy();
+}
+
+LRESULT MainWindow::WinProc(UINT msg, WPARAM wparam, LPARAM lparam)
+{
+    switch (msg) {
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            return 0;
+    }
+
+    // If nothing matched, fall back to base window's WinProc
+    return Window::WinProc(msg, wparam, lparam);
 }

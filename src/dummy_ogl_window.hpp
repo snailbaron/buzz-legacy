@@ -11,11 +11,15 @@
 class DummyOglWindow : public Window
 {
 public:
-    DummyOglWindow(const HINSTANCE &hInstance);
-    virtual ~DummyOglWindow();
+    DummyOglWindow(const HINSTANCE &hInstance) :
+        Window(hInstance, "DummyOglWindow"), m_dc(NULL), m_context(NULL) {}
+    virtual ~DummyOglWindow() {}
 
     const HDC Dc() const { return m_dc; }
     const HGLRC Context() const { return m_context; }
+
+    virtual void Init();
+    virtual void Destroy();
 
 protected:
     virtual const CHAR * ClassName() const { return "DummyOglWindowClass"; }

@@ -13,33 +13,20 @@ void ReportError(const char *msg)
     MessageBox(NULL, msg, "Error", MB_OK | MB_ICONERROR);
 }
 
-static const CHAR WND_CLASS_NAME[] = "MainWindowClass";
-static const CHAR WND_NAME[] = "MainWindow";
-
-LRESULT CALLBACK WinProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
-{
-    switch (msg) {
-        case WM_DESTROY:
-            PostQuitMessage(0);
-            return 0;
-    }
-    return DefWindowProc(hwnd, msg, wparam, lparam);
-}
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 {
     try {
 
-
     // Get OpenGL and platform-specific function pointers using
     // a dummy OpenGL context.
-    DummyOglWindow *dummyWnd = new DummyOglWindow(hInstance);
+    DummyOglWindow dummyWnd(hInstance);
+    dummyWnd.Init();
     LoadGlFuncs();
-    delete dummyWnd;
-
+    dummyWnd.Destroy();
 
     // Create proper window
-    MainWindow *wnd = new MainWindow(hInstance);
+    MainWindow wnd(hInstance);
+    wnd.Init();
 
     // Enter main loop
     bool done = false;
@@ -55,8 +42,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 
         // Do stuff
     }
-
-    delete wnd;
 
 
 
