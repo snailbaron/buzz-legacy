@@ -18,21 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dummy_ogl_window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gl_funcs_def.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main_window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="app.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game\game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,10 +27,22 @@
     <ClCompile Include="process_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="human_game_view.cpp">
+    <ClCompile Include="app\application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="app\application.cpp">
+    <ClCompile Include="platform\windows_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\human_game_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\dummy_ogl_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,22 +50,7 @@
     <ClInclude Include="error.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="optional.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dummy_ogl_window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gl_funcs_def.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="main_window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="app.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="glext.h">
@@ -80,13 +62,7 @@
     <ClInclude Include="input_handlers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="screen_element.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game\game.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_view.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="base_process.hpp">
@@ -95,15 +71,33 @@
     <ClInclude Include="process_manager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="human_game_view.hpp">
+    <ClInclude Include="app\application.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="app\application.hpp">
+    <ClInclude Include="app\timer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view\game_view.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view\human_game_view.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view\screen_element.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\window.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\dummy_ogl_window.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gl_funcs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="gl_funcs_helper.inc">
+    <None Include="app\gl_funcs_helper.inc">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

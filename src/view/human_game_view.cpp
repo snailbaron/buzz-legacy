@@ -1,4 +1,19 @@
 #include "human_game_view.hpp"
+#include "../app/window.hpp"
+
+HumanGameView::HumanGameView() :
+    m_processManager(),
+    m_screenElements()
+{
+}
+
+HumanGameView::~HumanGameView()
+{
+}
+
+void HumanGameView::Init()
+{
+}
 
 void HumanGameView::Update(long deltaMs)
 {

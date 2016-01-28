@@ -18,11 +18,8 @@ public:
 protected:
     virtual LRESULT WinProc(UINT msg, WPARAM wparam, LPARAM lparam);
 
-    virtual const CHAR * ClassName() const = 0;
-    virtual const UINT ClassStyle() const { return 0; }
-    virtual const DWORD WindowStyle() const { return 0; }
-
 private:
+    static const CHAR CLASS_NAME[];
     static LRESULT CALLBACK GlobalWinProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
     HINSTANCE m_hInstance;

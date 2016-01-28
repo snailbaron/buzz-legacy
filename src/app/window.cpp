@@ -1,6 +1,8 @@
 #include <strsafe.h>
 #include "window.hpp"
-#include "error.hpp"
+#include "../error.hpp"
+
+const char Window::CLASS_NAME[] = "WindowClass";
 
 LRESULT CALLBACK Window::GlobalWinProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
@@ -47,13 +49,13 @@ void Window::Init()
 {
     // Register window class, if not yet registered
     WNDCLASSEX wc = {0};
-    if (!GetClassInfoEx(m_hInstance, ClassName(), &wc)) {
+    if (!GetClassInfoEx(m_hInstance, CLASS_NAME, &wc)) {
          /* Create dummy window with dummy OpenGL context */
         WNDCLASSEX wc = {0};
         wc.cbSize = sizeof(WNDCLASSEX);
-        wc.style = ClassStyle();
+        wc.style = CS_OWNDC;
         wc.hInstance = m_hInstance;
-        wc.lpszClassName = ClassName();
+        wc.lpszClassName = CLASS_NAME;
         wc.lpfnWndProc = GlobalWinProc;
         if (!RegisterClassEx(&wc)) {
             throw Error(ERR_CREATE_WINDOW_CLASS);
@@ -62,8 +64,8 @@ void Window::Init()
 
     // Create window
     m_hwnd = CreateWindowEx(
-        0, ClassName(), m_name,
-        WindowStyle(),
+        0, CLASS_NAME, m_name,
+        WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
         NULL, NULL,
         m_hInstance,

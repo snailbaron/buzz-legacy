@@ -4,7 +4,7 @@
 #include <list>
 #include <memory>
 #include "../process_manager.hpp"
-#include "../game_view.hpp"
+#include "../view/game_view.hpp"
 
 enum class GameState
 {
