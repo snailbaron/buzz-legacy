@@ -161,11 +161,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app\application.cpp" />
+    <ClCompile Include="app\ogl_window.cpp" />
     <ClCompile Include="app\program.cpp" />
     <ClCompile Include="app\shader.cpp" />
     <ClCompile Include="app\timer.cpp" />
     <ClCompile Include="base_process.cpp" />
-    <ClCompile Include="app\dummy_ogl_window.cpp" />
     <ClCompile Include="game\game.cpp" />
     <ClCompile Include="errors\opengl_error.cpp" />
     <ClCompile Include="view\human_game_view.cpp" />
@@ -174,18 +174,20 @@
     <ClCompile Include="process_manager.cpp" />
     <ClCompile Include="app\window.cpp" />
     <ClCompile Include="errors\windows_error.cpp" />
+    <ClCompile Include="view\message_box.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app\application.hpp" />
+    <ClInclude Include="app\log.hpp" />
     <ClInclude Include="app\program.hpp" />
     <ClInclude Include="app\shader.hpp" />
     <ClInclude Include="app\timer.hpp" />
     <ClInclude Include="base_process.hpp" />
-    <ClInclude Include="app\dummy_ogl_window.hpp" />
     <ClInclude Include="errors.hpp" />
     <ClInclude Include="errors\error.hpp" />
     <ClInclude Include="game\game.hpp" />
     <ClInclude Include="errors\opengl_error.hpp" />
+    <ClInclude Include="app\ogl_window.hpp" />
     <ClInclude Include="view\game_view.hpp" />
     <ClInclude Include="glext.h" />
     <ClInclude Include="gl_funcs.hpp" />
@@ -193,6 +195,7 @@
     <ClInclude Include="input_handlers.hpp" />
     <ClInclude Include="optional.hpp" />
     <ClInclude Include="process_manager.hpp" />
+    <ClInclude Include="view\message_box.hpp" />
     <ClInclude Include="view\screen_element.hpp" />
     <ClInclude Include="wglext.h" />
     <ClInclude Include="app\window.hpp" />

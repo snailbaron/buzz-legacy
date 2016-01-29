@@ -21,7 +21,6 @@ public:
     const std::string & SourceFile() const { return m_sourceFile; }
     const std::string & Source() const { return m_source; }
     bool CompileSuccess() const { return (m_compileStatus == GL_TRUE); }
-    const char * CompileStatusString() const;
     const std::string & CompileLog() const { return m_compileLog; }
 
     void LoadSource(const char *fname);

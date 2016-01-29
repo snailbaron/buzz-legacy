@@ -1,7 +1,9 @@
 #include <fstream>
+#include <iostream>
 #include "shader.hpp"
 #include "../errors.hpp"
 #include "../gl_funcs.hpp"
+#include "log.hpp"
 
 Shader::Shader(GLenum type) :
     m_name(0),
@@ -62,17 +64,23 @@ Shader & Shader::operator=(const Shader &other)
 void Shader::LoadSource(const char *fname)
 {
     m_sourceFile = std::string(fname);
+    std::cerr << "Loading shader " << m_name << " source from " << m_sourceFile << std::endl;
+
     std::ifstream stream(fname);
     m_source = std::string((std::istreambuf_iterator<char>(stream)), (std::istreambuf_iterator<char>()));
     const GLchar *ptext = m_source.c_str();
     GLint len = (GLint)m_source.length();
     glShaderSource(m_name, 1, &ptext, &len);
+    std::cerr << "Shader source:" << std::endl << m_source << std::endl;
 }
 
 void Shader::Compile()
 {
+    std::cerr << "Compiling shader: " << m_name << " (" << TypeName() << ")" << std::endl;
     glCompileShader(m_name);
+
     glGetShaderiv(m_name, GL_COMPILE_STATUS, &m_compileStatus);
+    std::cerr << "Compile status: " << (m_compileStatus ? "OK" : "FAIL") << std::endl;
 
     GLint logBufSize;
     glGetShaderiv(m_name, GL_INFO_LOG_LENGTH, &logBufSize);
@@ -81,6 +89,7 @@ void Shader::Compile()
     glGetShaderInfoLog(m_name, logBufSize, &logLen, logBuffer);
     m_compileLog = std::string(logBuffer);
     delete[] logBuffer;
+    std::cerr << "Compilation log:" << std::endl << m_compileLog << std::endl;
 }
 
 const char * Shader::TypeName() const
@@ -92,11 +101,3 @@ const char * Shader::TypeName() const
     }
 }
 
-const char * Shader::CompileStatusString() const
-{
-    if (CompileSuccess()) {
-        return "OK";
-    } else { 
-        return "FAIL";
-    }
-}

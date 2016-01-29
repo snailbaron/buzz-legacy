@@ -42,9 +42,6 @@
     <ClCompile Include="app\window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="app\dummy_ogl_window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="errors\opengl_error.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,6 +52,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="app\program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\ogl_window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view\message_box.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,9 +101,6 @@
     <ClInclude Include="app\window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="app\dummy_ogl_window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gl_funcs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -120,6 +120,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="app\program.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\ogl_window.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\log.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view\message_box.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

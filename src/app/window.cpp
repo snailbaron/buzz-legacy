@@ -1,8 +1,6 @@
-#include <strsafe.h>
+#include <cassert>
 #include "window.hpp"
 #include "../errors.hpp"
-
-const char Window::CLASS_NAME[] = "WindowClass";
 
 LRESULT CALLBACK Window::GlobalWinProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
@@ -32,39 +30,43 @@ LRESULT CALLBACK Window::GlobalWinProc(HWND hwnd, UINT msg, WPARAM wparam, LPARA
     }
 }
 
-Window::Window(const HINSTANCE &hInstance, const CHAR *name) :
-    m_hInstance(hInstance), m_name(nullptr), m_hwnd(NULL)
+Window::Window(const HINSTANCE &hInstance, const char *name) :
+    m_hInstance(hInstance),
+    m_name(name),
+    m_hwnd(NULL),
+    m_hdc(NULL),
+    m_hglrc(NULL)
 {
-    size_t bufLen = strlen(name) + 1;
-    m_name = new CHAR[bufLen];
-    StringCchCopy(m_name, bufLen, name);
 }
 
 Window::~Window()
 {
-    delete[] m_name;
 }
 
-void Window::Init()
+void Window::RegClass()
+{
+    WNDCLASSEX wc = {0};
+    wc.cbSize = sizeof(WNDCLASSEX);
+    wc.style = CS_OWNDC;
+    wc.hInstance = m_hInstance;
+    wc.lpszClassName = ClassName();
+    wc.lpfnWndProc = GlobalWinProc;
+    if (!RegisterClassEx(&wc)) {
+        throw WindowsError(ERR_CREATE_WINDOW_CLASS);
+    }
+}
+
+void Window::Create()
 {
     // Register window class, if not yet registered
     WNDCLASSEX wc = {0};
-    if (!GetClassInfoEx(m_hInstance, CLASS_NAME, &wc)) {
-         /* Create dummy window with dummy OpenGL context */
-        WNDCLASSEX wc = {0};
-        wc.cbSize = sizeof(WNDCLASSEX);
-        wc.style = CS_OWNDC;
-        wc.hInstance = m_hInstance;
-        wc.lpszClassName = CLASS_NAME;
-        wc.lpfnWndProc = GlobalWinProc;
-        if (!RegisterClassEx(&wc)) {
-            throw Error(ERR_CREATE_WINDOW_CLASS);
-        }
+    if (!GetClassInfoEx(m_hInstance, ClassName(), &wc)) {
+        RegClass();
     }
 
     // Create window
     m_hwnd = CreateWindowEx(
-        0, CLASS_NAME, m_name,
+        0, ClassName(), m_name.c_str(),
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT, 800, 600,
         NULL, NULL,
@@ -74,12 +76,58 @@ void Window::Init()
     if (m_hwnd == NULL) {
         throw Error(ERR_CREATE_WINDOW);
     }
+
+    // Save window's device context
+    m_hdc = GetDC(m_hwnd);
+}
+
+void Window::SetSimplePixelFormat()
+{
+    assert(m_hdc);
+
+    // Select a simple pixel format: RGBA, 24-depth, 8-stencil
+    PIXELFORMATDESCRIPTOR pfd = {0};
+    pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
+    pfd.nVersion = 1;
+    pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;   //Flags
+    pfd.iPixelType = PFD_TYPE_RGBA;     // The kind of framebuffer. RGBA or palette.
+    pfd.cDepthBits = 24;                // bits for depth buffer
+    pfd.cStencilBits = 8;               // bits for stencil buffer
+    pfd.cAuxBuffers = 0;                // number of Aux buffers in the framebuffer
+    pfd.iLayerType = PFD_MAIN_PLANE;
+
+    int pixelFormat = ChoosePixelFormat(m_hdc, &pfd);
+    if (pixelFormat == 0) {
+        throw WindowsError(ERR_PIXEL_FORMAT);
+    }
+
+    // Set the pixel format, if found
+    if (!SetPixelFormat(m_hdc, pixelFormat, &pfd)) {
+        throw WindowsError(ERR_PIXEL_FORMAT);
+    }
+}
+
+void Window::CreateOpenGLContext()
+{
+    assert(m_hdc);
+    m_hglrc = wglCreateContext(m_hdc);
+    if (!wglMakeCurrent(m_hdc, m_hglrc)) {
+        throw WindowsError(ERR_OPENGL_CONTEXT);
+    }
 }
 
 void Window::Destroy()
 {
-    // Destroy underlying window
+    if (m_hglrc) {
+        assert(m_hdc);
+        wglMakeCurrent(m_hdc, NULL);
+        wglDeleteContext(m_hglrc);
+        m_hglrc = NULL;
+    }
+    assert(m_hwnd);
     DestroyWindow(m_hwnd);
+    m_hdc = NULL;
+    m_hwnd = NULL;
 }
 
 // Window procedure for this Window class. For base Window, use the default WinProc.
@@ -88,3 +136,21 @@ LRESULT Window::WinProc(UINT msg, WPARAM wparam, LPARAM lparam)
     return DefWindowProc(m_hwnd, msg, wparam, lparam);
 }
 
+void Window::Show()
+{
+    ShowWindow(m_hwnd, SW_SHOWNORMAL);
+}
+
+long Window::PixelWidth() const
+{
+    RECT rect;
+    GetWindowRect(m_hwnd, &rect);
+    return (rect.right - rect.left);
+}
+
+long Window::PixelHeight() const
+{
+    RECT rect;
+    GetWindowRect(m_hwnd, &rect);
+    return (rect.bottom - rect.top);
+}

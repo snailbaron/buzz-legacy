@@ -13,6 +13,7 @@ public:
     Program();
     ~Program();
 
+    const GLint Name() const { return m_name; }
     const std::vector<Shader> & Shaders() const { return m_shaders; }
     bool LinkSuccess() const { return (m_linkStatus == GL_TRUE); }
     const char * LinkStatusString() const;
