@@ -7,7 +7,7 @@
 #include "wglext.h"
 
 #define FUNCTION(TYPE, NAME) extern TYPE NAME;
-#include "gl_funcs_helper.inc"
+#include "app/gl_funcs_helper.inc"
 #undef FUNCTION
 
 /** Load OpenGL and platform-specific functions */

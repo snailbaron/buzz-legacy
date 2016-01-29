@@ -1,5 +1,5 @@
 #include "dummy_ogl_window.hpp"
-#include "../error.hpp"
+#include "../errors.hpp"
 
 void DummyOglWindow::Init()
 {

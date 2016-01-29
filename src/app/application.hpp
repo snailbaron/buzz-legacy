@@ -24,6 +24,8 @@ public:
 
     void Destroy();
 
+    HDC DeviceContext() const { return m_oglDc; }
+
 private:
     // Platform-specific application info
     HINSTANCE m_hInstance;

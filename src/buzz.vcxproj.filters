@@ -45,11 +45,20 @@
     <ClCompile Include="app\dummy_ogl_window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="errors\opengl_error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="errors\windows_error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="app\program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="error.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="optional.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -95,10 +104,30 @@
     <ClInclude Include="gl_funcs.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="errors\error.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="errors\opengl_error.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="errors\windows_error.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="errors.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\shader.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="app\program.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="app\gl_funcs_helper.inc">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="test.vert" />
+    <None Include="test.frag" />
   </ItemGroup>
 </Project>

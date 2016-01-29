@@ -1,8 +1,10 @@
 #include "application.hpp"
 #include "timer.hpp"
 #include "window.hpp"
-#include "../error.hpp"
+#include "../errors.hpp"
 #include "../gl_funcs.hpp"
+#include <fstream>
+#include <string>
 
 // Define OpenGL extension functions here
 #define FUNCTION(TYPE, NAME) TYPE NAME;
@@ -33,10 +35,11 @@ void Application::LoadOpenGLFunctions()
 
 void Application::InitializeGfx()
 {
-    /* Create dummy OpenGL context */
+     /* Create dummy OpenGL context */
 
     // Create dummy window, and get device context from it
     Window dummyWindow(m_hInstance, "Dummy Window");
+    dummyWindow.Init();
     HDC dummyDc = GetDC(dummyWindow.Hwnd());
 
     // Set pixel format to a simple RGBA, 24-depth, 8-stencil
@@ -93,10 +96,20 @@ void Application::InitializeGfx()
     if (!wglChoosePixelFormatARB(m_oglDc, attrs, NULL, 1, &pixelFormat, &numFormats)) {
         throw Error(ERR_PIXEL_FORMAT);
     }
+    if (!SetPixelFormat(m_oglDc, pixelFormat, &pfd)) {
+        throw WindowsError(ERR_PIXEL_FORMAT);
+    }
 
     // Create OpenGL context
-    m_hglrc = wglCreateContextAttribsARB(m_oglDc, 0, attrs);
-    wglMakeCurrent(m_oglDc, m_hglrc);
+    const int contextAttrs[] = {
+        WGL_CONTEXT_MAJOR_VERSION_ARB, 4,
+        WGL_CONTEXT_MINOR_VERSION_ARB, 0,
+        0
+    };
+    m_hglrc = wglCreateContextAttribsARB(m_oglDc, 0, contextAttrs);
+    if (!wglMakeCurrent(m_oglDc, m_hglrc)) {
+        throw WindowsError(ERR_OPENGL_CONTEXT);
+    }
 
     // Show main window
     ShowWindow(m_wnd.Hwnd(), SW_SHOWNORMAL);
@@ -133,3 +146,4 @@ void Application::Destroy()
     wglDeleteContext(m_hglrc);
     m_wnd.Destroy();
 }
+

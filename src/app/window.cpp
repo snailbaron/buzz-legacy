@@ -1,6 +1,6 @@
 #include <strsafe.h>
 #include "window.hpp"
-#include "../error.hpp"
+#include "../errors.hpp"
 
 const char Window::CLASS_NAME[] = "WindowClass";
 

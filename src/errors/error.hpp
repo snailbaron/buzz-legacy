@@ -11,12 +11,15 @@ enum ErrorCode
     ERR_INIT_NOT_ENOUGH_PHYS_MEMORY,
     ERR_INIT_NOT_ENOUGH_VIRT_MEMORY,
     ERR_INIT_NOT_ENOUGH_CONTIG_MEMORY,
+    ERR_OPENGL,
 };
 
 class Error
 {
 public:
     Error(const ErrorCode &errCode) : m_errCode(errCode) {}
+    virtual ~Error() {}
+
     const ErrorCode & ErrCode() const { return m_errCode; }
 
 private:
